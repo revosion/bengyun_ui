@@ -3,9 +3,7 @@ import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Settings from '@/utils/readSetting';
 
-window.React = React;
-
-const { pwa } = Settings;
+const pwa = Settings.get('pwa');
 // if pwa is true
 if (pwa) {
   // Notify user if offline now

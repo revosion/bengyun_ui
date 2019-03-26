@@ -5,7 +5,9 @@ import webpackPlugin from './plugin.config';
 import Settings from '../src/utils/readSetting';
 import slash from 'slash2';
 
-const { pwa, primaryColor } = Settings;
+const pwa = Settings.get('pwa');
+const primaryColor = Settings.get('primaryColor');
+
 const { APP_TYPE, TEST } = process.env;
 
 const plugins = [
