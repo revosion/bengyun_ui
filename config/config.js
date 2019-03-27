@@ -2,11 +2,8 @@
 import os from 'os';
 import pageRoutes from './router.config';
 import webpackPlugin from './plugin.config';
-import Settings from '../src/utils/readSetting';
+import { pwa, primaryColor } from '../src/defaultSettings';
 import slash from 'slash2';
-
-const pwa = Settings.get('pwa');
-const primaryColor = Settings.get('primaryColor');
 
 const { APP_TYPE, TEST } = process.env;
 
