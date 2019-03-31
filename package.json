@@ -19,7 +19,7 @@
     "tslint": "npm run tslint:fix",
     "tslint:fix": "tslint --fix 'src/**/*.ts*'",
     "generateMock": "node ./scripts/generateMock",
-    "functions:run": "npm run generateMock && netlify-lambda serve ./lambda",
+    "functions:run": "npm run generateMock && cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "functions:build": "npm run generateMock && netlify-lambda build ./lambda",
     "test": "umi test",
     "test:component": "umi test ./src/components",
