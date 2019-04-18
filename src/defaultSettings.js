@@ -1,16 +1,17 @@
 module.exports = {
-  navTheme: 'dark', // theme for nav menu
-  primaryColor: '#1890FF', // primary color of ant design
-  layout: 'sidemenu', // nav menu position: sidemenu or topmenu
-  contentWidth: 'Fluid', // layout of content: Fluid or Fixed, only works when layout is topmenu
-  fixedHeader: false, // sticky header
-  autoHideHeader: false, // auto hide header
-  fixSiderbar: false, // sticky siderbar
-  menu: {
-    disableLocal: false,
+  "navTheme": "dark",
+  "primaryColor": "#1890FF",
+  "layout": "topmenu",
+  "contentWidth": "Fluid",
+  "fixedHeader": true,
+  "autoHideHeader": false,
+  "fixSiderbar": false,
+  "menu": {
+    "disableLocal": false
   },
-  title: '中国泵云',
-  pwa: true,
+  "title": "中国泵云",
+  "pwa": true,
+  "collapse": true,
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
   // 注意：如果需要图标多色，Iconfont 图标项目里要进行批量去色处理

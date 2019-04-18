@@ -5,6 +5,7 @@ import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
 import styles from './Analysis.less';
 import PageLoading from '@/components/PageLoading';
+import MapView from '@/components/Map';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -130,6 +131,12 @@ class Analysis extends Component {
       <GridContent>
         <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={visitData} />
+        </Suspense>
+        <Suspense fallback={<PageLoading />}>
+          <div style={{ width: '100%', height: '500px'}}>
+            <MapView />
+          </div>
+          <br/>
         </Suspense>
         <Suspense fallback={null}>
           <SalesCard

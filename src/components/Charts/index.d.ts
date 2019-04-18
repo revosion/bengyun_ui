@@ -11,6 +11,7 @@ import { default as Radar } from './Radar';
 import { default as TagCloud } from './TagCloud';
 import { default as TimelineChart } from './TimelineChart';
 import { default as WaterWave } from './WaterWave';
+import RealtimeLine from './RealtimeLine';
 
 declare const yuan: (value: number | string) => string;
 
@@ -28,6 +29,7 @@ declare const Charts: {
   WaterWave: WaterWave;
   TagCloud: TagCloud;
   TimelineChart: TimelineChart;
+  RealtimeLine: RealtimeLine;
 };
 
 export {
@@ -45,4 +47,5 @@ export {
   WaterWave,
   TagCloud,
   TimelineChart,
+  RealtimeLine,
 };

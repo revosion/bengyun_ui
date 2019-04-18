@@ -1,7 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
-import { setAuthority } from '@/utils/authority';
+import { fakeAccountLogin, getFakeCaptcha, accountLogin } from '@/services/api';
+import { setAuthority, setToken } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
 
@@ -14,7 +14,19 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      payload = {
+        ...payload,
+        "email": payload.userName,
+      }
+      let response = yield call(accountLogin, payload);
+      if (response.token) {
+        response = {
+          ...response,
+          "status": "ok",
+          "type": "account",
+          "currentAuthority": "admin",
+        };
+      }
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -70,6 +82,7 @@ export default {
   reducers: {
     changeLoginStatus(state, { payload }) {
       setAuthority(payload.currentAuthority);
+      setToken(payload.token);
       return {
         ...state,
         status: payload.status,
