@@ -12,7 +12,7 @@ import Authorized from '@/utils/Authorized';
 import styles from './Monitor.less';
 import Websocket from 'react-websocket';
 import { routerRedux } from 'dva/router';
-import { isEmpty } from "lodash"
+import { isEmpty } from 'lodash';
 
 const { Secured } = Authorized;
 
@@ -33,9 +33,6 @@ class Monitor extends Component {
   constructor(props) {
     super(props);
     this.state = { current: null, voltage: null };
-  }
-
-  componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
       type: 'monitor/fetchThings',
@@ -45,25 +42,30 @@ class Monitor extends Component {
     });
   }
 
+  componentDidMount() {}
+
   handleData = data => {
     let result = JSON.parse(data);
     const timestamp = new Date(result[0].bt);
     const voltage = { x: timestamp, y: result[0].v };
     const current = { x: timestamp, y: result[1].v };
-    this.setState({ voltage: voltage, current: current })
+    this.setState({ voltage: voltage, current: current });
   };
 
   render() {
     const { monitor, loading } = this.props;
     const { things, channels } = monitor;
-    console.log(things);
 
     let ws;
     if (!isEmpty(things) && !isEmpty(channels)) {
       const channelId = channels.channels[0].id;
       const thingKey = things.things[1].key;
-      const url = 'ws://dashboard.bengyun.io/ws/channels/' + channelId + '/messages?authorization=' + thingKey;
-      ws = <Websocket url={url} onMessage={this.handleData} />
+      const url =
+        'ws://dashboard.bengyun.io/ws/channels/' +
+        channelId +
+        '/messages?authorization=' +
+        thingKey;
+      ws = <Websocket url={url} onMessage={this.handleData} />;
     }
 
     return (
@@ -81,9 +83,7 @@ class Monitor extends Component {
                 }
                 style={{ marginBottom: 24 }}
                 bordered={false}
-              >
-                <GaugeTick height={161} />
-              </Card>
+              />
             </Row>
             <Row>
               <Card
@@ -117,7 +117,7 @@ class Monitor extends Component {
               bordered={false}
               bodyStyle={{ overflow: 'hidden' }}
             >
-              <RealtimeLine newValue={this.state.voltage} minY={-120} maxY={120} />
+              <RealtimeLine newValue={this.state.voltage} minY={0} maxY={2} />
             </Card>
           </Col>
           <Col xl={9} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
@@ -132,11 +132,10 @@ class Monitor extends Component {
               bordered={false}
               bodyStyle={{ overflow: 'hidden' }}
             >
-              <RealtimeLine newValue={this.state.current} minY={-10} maxY={10} />
+              <RealtimeLine newValue={this.state.current} minY={0} maxY={2} />
             </Card>
           </Col>
         </Row>
-
       </GridContent>
     );
   }

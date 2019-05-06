@@ -1,4 +1,4 @@
-import analysis from './zh-CN/analysis';
+import overview from './zh-CN/overview';
 import exception from './zh-CN/exception';
 import form from './zh-CN/form';
 import globalHeader from './zh-CN/globalHeader';
@@ -21,7 +21,7 @@ export default {
   'app.forms.basic.title': '基础表单',
   'app.forms.basic.description':
     '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
-  ...analysis,
+  ...overview,
   ...exception,
   ...form,
   ...globalHeader,

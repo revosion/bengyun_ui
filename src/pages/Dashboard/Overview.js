@@ -1,11 +1,10 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Icon, Menu, Dropdown } from 'antd';
+import { Row, Col, Icon, Menu, Dropdown, Button } from 'antd';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
 import styles from './Overview.less';
 import PageLoading from '@/components/PageLoading';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import MapView from '@/components/Map';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
@@ -23,6 +22,7 @@ class Analysis extends Component {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
+    visiblePage: 0,
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class Analysis extends Component {
         type: 'chart/fetch',
       });
     });
-  };
+  }
 
   componentWillUnmount() {
     const { dispatch } = this.props;
@@ -91,8 +91,12 @@ class Analysis extends Component {
     return '';
   };
 
+  showPage = value => {
+    this.setState({ visiblePage: value });
+  };
+
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
+    const { rangePickerValue, salesType, currentTabKey, visiblePage } = this.state;
     const { chart, loading } = this.props;
     const {
       visitData,
@@ -128,69 +132,43 @@ class Analysis extends Component {
 
     const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
 
-    return (
-      <GridContent>
-        <Suspense fallback={<PageLoading />}>
-          <IntroduceRow loading={loading} visitData={visitData} />
-        </Suspense>
-        <Suspense fallback={<PageLoading />}>
-          <div style={{ width: '100%', height: '500px'}}>
-            <MapView />
-          </div>
-          <br/>
-        </Suspense>
-        <Suspense fallback={null}>
-          <SalesCard
-            rangePickerValue={rangePickerValue}
-            salesData={salesData}
-            isActive={this.isActive}
-            handleRangePickerChange={this.handleRangePickerChange}
-            loading={loading}
-            selectDate={this.selectDate}
-          />
-        </Suspense>
-        <div className={styles.twoColLayout}>
-          <Row gutter={24}>
-            <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-              <Suspense fallback={null}>
-                <TopSearch
-                  loading={loading}
-                  visitData2={visitData2}
-                  selectDate={this.selectDate}
-                  searchData={searchData}
-                  dropdownGroup={dropdownGroup}
-                />
-              </Suspense>
-            </Col>
-            <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-              <Suspense fallback={null}>
-                <ProportionSales
-                  dropdownGroup={dropdownGroup}
-                  salesType={salesType}
-                  loading={loading}
-                  salesPieData={salesPieData}
-                  handleChangeSalesType={this.handleChangeSalesType}
-                />
-              </Suspense>
-            </Col>
-          </Row>
-        </div>
-        <Suspense fallback={null}>
-          <OfflineData
-            activeKey={activeKey}
-            loading={loading}
-            offlineData={offlineData}
-            offlineChartData={offlineChartData}
-            handleTabChange={this.handleTabChange}
-          />
-        </Suspense>
-      </GridContent>
-    );
+    if (visiblePage === 0) {
+      return (
+        <GridContent>
+          <Suspense fallback={<PageLoading />}>
+            <IntroduceRow loading={loading} visitData={visitData} />
+          </Suspense>
+          <Suspense fallback={<PageLoading />}>
+            <div style={{ width: '100%', height: '700px' }}>
+              <MapView showPage={this.showPage} />
+            </div>
+            <br />
+          </Suspense>
+          <Suspense>
+            <Button onClick={() => this.showPage(1)}>Test</Button>
+          </Suspense>
+        </GridContent>
+      );
+    } else {
+      return (
+        <GridContent>
+          <Suspense fallback={null}>
+            <SalesCard
+              rangePickerValue={rangePickerValue}
+              salesData={salesData}
+              isActive={this.isActive}
+              handleRangePickerChange={this.handleRangePickerChange}
+              loading={loading}
+              selectDate={this.selectDate}
+            />
+          </Suspense>
+          <Suspense>
+            <Button onClick={() => this.showPage(0)}>Test</Button>
+          </Suspense>
+        </GridContent>
+      );
+    }
   }
 }
 
-export default props => (
-  <AsyncLoadBizCharts>
-    <Analysis {...props} />
-  </AsyncLoadBizCharts>
-);
+export default Analysis;

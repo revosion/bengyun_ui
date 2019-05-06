@@ -31,4 +31,12 @@ export default {
   'app.analysis.table.search-keyword': '搜索关键词',
   'app.analysis.table.users': '用户数',
   'app.analysis.table.weekly-range': '周涨幅',
+
+  'app.overview.running-pumps': '在运行泵数',
+  'app.overview.highest-running-pumps': '最多同时运行泵数',
+  'app.overview.health-index': '系统健康指数',
+  'app.overview.operation-hours': '运行时间',
+  'app.overview.daily-operation-hours': '日运行时间',
+  'app.overview.down-pumps': '待维修泵数',
+  'app.overview.down-pumps-rate': '维修率',
 };

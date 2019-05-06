@@ -24,23 +24,20 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/dashboard/overview', authority: ['admin', 'user'] },
       {
-        path: '/dashboard',
-        name: 'dashboard',
+        path: '/dashboard/overview',
+        authority: ['admin', 'user'],
+        name: 'overview',
         icon: 'dashboard',
-        routes: [
-          {
-            path: '/dashboard/analysis',
-            name: 'analysis',
-            component: './Dashboard/Analysis',
-          },
-          {
-            path: '/dashboard/monitor',
-            name: 'monitor',
-            component: './Dashboard/Monitor',
-          },
-        ],
+        component: './Dashboard/Overview',
+      },
+      {
+        path: '/dashboard/monitor',
+        authority: ['admin', 'user'],
+        name: 'monitor',
+        icon: 'dashboard',
+        component: './Dashboard/Monitor',
       },
     ],
   },

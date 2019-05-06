@@ -21,7 +21,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title={<FormattedMessage id="app.analysis.total-sales" defaultMessage="Total Sales" />}
+        title={<FormattedMessage id="app.overview.running-pumps" defaultMessage="Running Pumps" />}
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -30,11 +30,16 @@ const IntroduceRow = memo(({ loading, visitData }) => (
           </Tooltip>
         }
         loading={loading}
-        total={() => <Yuan>126560</Yuan>}
+        total={() => '26/45'}
         footer={
           <Field
-            label={<FormattedMessage id="app.analysis.day-sales" defaultMessage="Daily Sales" />}
-            value={`￥${numeral(12423).format('0,0')}`}
+            label={
+              <FormattedMessage
+                id="app.overview.highest-running-pumps"
+                defaultMessage="Highest Running Pumps"
+              />
+            }
+            value={30}
           />
         }
         contentHeight={46}
@@ -54,7 +59,9 @@ const IntroduceRow = memo(({ loading, visitData }) => (
       <ChartCard
         bordered={false}
         loading={loading}
-        title={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
+        title={
+          <FormattedMessage id="app.overview.operation-hours" defaultMessage="Opeartion Hours" />
+        }
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -62,11 +69,16 @@ const IntroduceRow = memo(({ loading, visitData }) => (
             <Icon type="info-circle-o" />
           </Tooltip>
         }
-        total={numeral(8846).format('0,0')}
+        total={numeral(235.6).format('0,0') + 'Hours'}
         footer={
           <Field
-            label={<FormattedMessage id="app.analysis.day-visits" defaultMessage="Daily Visits" />}
-            value={numeral(1234).format('0,0')}
+            label={
+              <FormattedMessage
+                id="app.overview.daily-operation-hours"
+                defaultMessage="Daily Operation Hours"
+              />
+            }
+            value={numeral(34.2).format('0,0') + 'Hours'}
           />
         }
         contentHeight={46}
@@ -78,7 +90,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
       <ChartCard
         bordered={false}
         loading={loading}
-        title={<FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />}
+        title={<FormattedMessage id="app.overview.down-pumps" defaultMessage="Down Pumps" />}
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -86,14 +98,11 @@ const IntroduceRow = memo(({ loading, visitData }) => (
             <Icon type="info-circle-o" />
           </Tooltip>
         }
-        total={numeral(6560).format('0,0')}
+        total={numeral(2).format('0,0')}
         footer={
           <Field
             label={
-              <FormattedMessage
-                id="app.analysis.conversion-rate"
-                defaultMessage="Conversion Rate"
-              />
+              <FormattedMessage id="app.overview.down-pumps-rate" defaultMessage="Repair Rate" />
             }
             value="60%"
           />
@@ -107,12 +116,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
       <ChartCard
         loading={loading}
         bordered={false}
-        title={
-          <FormattedMessage
-            id="app.analysis.operational-effect"
-            defaultMessage="Operational Effect"
-          />
-        }
+        title={<FormattedMessage id="app.overview.health-index" defaultMessage="Health Index" />}
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -120,7 +124,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
             <Icon type="info-circle-o" />
           </Tooltip>
         }
-        total="78%"
+        total="98%"
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
             <Trend flag="up" style={{ marginRight: 16 }}>
