@@ -24,16 +24,16 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/overview', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/overview', authority: ['admin', 'user'] },
       {
-        path: '/dashboard/overview',
+        path: '/overview',
         authority: ['admin', 'user'],
         name: 'overview',
         icon: 'dashboard',
         component: './Dashboard/Overview',
       },
       {
-        path: '/dashboard/monitor',
+        path: '/monitor',
         authority: ['admin', 'user'],
         name: 'monitor',
         icon: 'dashboard',

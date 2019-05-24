@@ -57,11 +57,13 @@ class Monitor extends Component {
     const { things, channels } = monitor;
 
     let ws;
+    console.log(things);
+
     if (!isEmpty(things) && !isEmpty(channels)) {
       const channelId = channels.channels[0].id;
       const thingKey = things.things[1].key;
       const url =
-        'ws://dashboard.bengyun.io/ws/channels/' +
+        'ws://www.bengyun.io/ws/channels/' +
         channelId +
         '/messages?authorization=' +
         thingKey;
@@ -100,7 +102,7 @@ class Monitor extends Component {
                 <Gauge
                   title={formatMessage({ id: 'app.monitor.ratio', defaultMessage: 'Ratio' })}
                   height={161}
-                  percent={30}
+                  percent={this.state.voltage}
                 />
               </Card>
             </Row>

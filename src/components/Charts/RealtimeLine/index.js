@@ -34,7 +34,7 @@ class RealtimeLine extends Component {
     const { data } = this.state;
     const { minY, maxY } = this.props;
     console.log(data);
-    if (data.length >= 100) {
+    if (data.length >= 1) {
       return (
         <Line
           width={600}

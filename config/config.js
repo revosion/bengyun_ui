@@ -61,6 +61,8 @@ if (APP_TYPE === 'site') {
 export default {
   // add for transfer to umi
   plugins,
+  base: '/dashboard/',
+  publicPath: '/',
   define: {
     APP_TYPE: APP_TYPE || '',
   },
@@ -76,10 +78,20 @@ export default {
     'primary-color': primaryColor,
   },
   proxy: {
-    '/bengyun/': {
-      target: 'http://dashboard.bengyun.io/',
+    '/tokens': {
+      target: 'http://www.bengyun.io/',
       changeOrigin: true,
-      pathRewrite: { '^/bengyun': '' },
+      //pathRewrite: { '^/bengyun': '' },
+    },
+    '/things': {
+      target: 'http://www.bengyun.io/',
+      changeOrigin: true,
+      //pathRewrite: { '^/bengyun': '' },
+    },
+    '/channels': {
+      target: 'http://www.bengyun.io/',
+      changeOrigin: true,
+      //pathRewrite: { '^/bengyun': '' },
     },
   },
   ignoreMomentLocale: true,
@@ -110,7 +122,7 @@ export default {
     },
   },
   manifest: {
-    basePath: '/',
+    basePath: '/dashboard',
   },
 
   chainWebpack: webpackPlugin,

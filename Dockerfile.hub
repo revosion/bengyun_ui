@@ -1,4 +1,4 @@
-FROM nginx
+from nginx:1.14.2-alpine
 
 WORKDIR /usr/src/app/
 
